@@ -1,16 +1,19 @@
 package com.example.fynddemoproject.base
 
 import android.os.Bundle
+import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.fynddemoproject.R
 import com.example.fynddemoproject.extenssions.inTransaction
+import com.google.android.material.snackbar.Snackbar
 import dagger.android.AndroidInjection
 import timber.log.Timber
 
 open class BaseAppCompatActivity : AppCompatActivity() {
 
-    open fun fragment(): BaseFragment? = null
+    open fun initializeAppBar() {}
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,15 +24,11 @@ open class BaseAppCompatActivity : AppCompatActivity() {
         fragment: Fragment?,
         animate: Boolean,
         addToBackStack: Boolean,
-        tag: String,
-        container: Int = R.id.fragmentContainer,
-        checkAdded: Boolean = false
+        tag: String?,
+        container: Int = R.id.fragment_container,
     ) =
         fragment?.let {
             try {
-                if (checkAdded && supportFragmentManager.findFragmentByTag(tag) != null) {
-                    return@let
-                }
 
                 val transaction = supportFragmentManager.beginTransaction()
                 if (animate)
@@ -59,8 +58,8 @@ open class BaseAppCompatActivity : AppCompatActivity() {
         fragment: Fragment?,
         animate: Boolean,
         addToBackStack: Boolean,
-        tag: String,
-        container: Int = R.id.fragmentContainer
+        tag: String?,
+        container: Int = R.id.fragment_container
     ) =
         fragment?.let {
             try {
@@ -84,5 +83,21 @@ open class BaseAppCompatActivity : AppCompatActivity() {
                 Timber.e(ex)
             }
         }
+
+    fun showLongSnackBar(view: View, message: String) {
+        Snackbar.make(view, message, Snackbar.LENGTH_LONG).show()
+    }
+
+    fun showLongSnackBar(view: View, message: Int) {
+        Snackbar.make(view, message, Snackbar.LENGTH_LONG).show()
+    }
+
+    fun showLongToast(view: View, message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+    }
+
+    fun showLongToast(message: Int) {
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+    }
 
 }

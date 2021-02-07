@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="movie"
+            type="com.example.fynddemoproject.network.data.MoviesList" />
+
+        <variable
+            name="listener"
+            type="com.example.fynddemoproject.home.ListAdapter.ItemClickListener" />
+
+
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/movie_row_height"
+        android:layout_marginHorizontal="@dimen/margin_8dp"
+        android:layout_marginVertical="@dimen/margin_12dp"
+        android:onClick="@{() -> listener.onMovieClicked(movie.id)}"
+        app:cardCornerRadius="@dimen/margin_8dp"
+        app:cardElevation="@dimen/margin_4dp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivMovieImage"
+            imageUrl="@{movie.posterPath}"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY" />
+
+        <TextView
+            android:id="@+id/layoutMovieName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="@color/translucentBackground"
+            android:ellipsize="end"
+            android:maxLines="3"
+            android:orientation="horizontal"
+            android:paddingStart="@dimen/margin_4dp"
+            android:paddingEnd="@dimen/margin_4dp"
+            android:text="@{movie.title}"
+            android:textColor="@color/colorTextPrimary"
+            android:textSize="@dimen/text_size_14sp" />
+
+    </androidx.cardview.widget.CardView>
+</layout>

@@ -1,9 +1,227 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".detail.DetailActivity">
+    xmlns:tools="http://schemas.android.com/tools">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <data>
+
+        <variable
+            name="vm"
+            type="com.example.fynddemoproject.detail.DetailViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".detail.DetailActivity">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/cover"
+            imageUrl="@{vm.movieDetailData.posterPath}"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/black_mask"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#66000000"
+            android:visibility="visible" />
+
+        <ScrollView
+            android:id="@+id/main_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:paddingTop="240dp"
+            android:scrollbars="none">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginBottom="16dp"
+                    app:cardBackgroundColor="@color/colorPrimaryDark"
+                    app:cardCornerRadius="2dp"
+                    app:cardElevation="2dp"
+                    app:cardUseCompatPadding="true"
+                    app:contentPadding="16dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/title"
+                            android:layout_width="match_parent"
+                            android:layout_height="80dp"
+                            android:ellipsize="end"
+                            android:gravity="center_vertical"
+                            android:maxLines="2"
+                            android:text="@{vm.movieDetailData.title}"
+                            android:textColor="@color/colorTextPrimary"
+                            android:textSize="28sp"
+                            tools:text="A Movie Title" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/averageVotes"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/margin_20dp"
+                            android:drawableStart="@drawable/ic_voating"
+                            android:drawablePadding="16dp"
+                            android:gravity="center_vertical"
+                            textColor="@{vm.movieDetailData.voteAverage}"
+                            android:text="@{vm.movieDetailData.voteAverage}"
+                            android:textSize="@dimen/text_size_12sp"
+                            tools:text="ABCD" />
+
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/year"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/margin_20dp"
+                            android:drawableStart="@drawable/ic_calender"
+                            android:drawablePadding="16dp"
+                            android:gravity="center_vertical"
+                            android:text="@{vm.movieDetailData.releaseDate}"
+                            android:textColor="@color/colorTextSecondary"
+                            android:textSize="@dimen/text_size_12sp"
+                            app:drawableTint="@color/colorTextPrimary"
+                            tools:text="ABCD" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/homepage"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/margin_20dp"
+                            android:drawableStart="@drawable/ic_home"
+                            android:drawablePadding="16dp"
+                            android:gravity="center_vertical"
+                            android:text="@{vm.movieDetailData.homepage}"
+                            android:textColor="@color/colorTextSecondary"
+                            android:textSize="@dimen/text_size_12sp"
+                            app:drawableTint="@color/colorTextPrimary"
+                            tools:text="http://www.somewebsite.com/" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/companies"
+                            productionCompanies="@{vm.movieDetailData.productionCompanies}"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/margin_20dp"
+                            android:drawableStart="@drawable/ic_producers"
+                            android:drawablePadding="16dp"
+                            android:gravity="center_vertical"
+                            android:textColor="@color/colorTextSecondary"
+                            android:textSize="@dimen/text_size_12sp"
+                            app:drawableTint="@color/colorTextPrimary"
+                            tools:text="Company 1, Company 2, Company 3, Company 4, Company 5" />
+
+                        <LinearLayout
+                            android:id="@+id/tagline_container"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="@dimen/margin_8dp"
+                                android:text="@string/Tegline"
+                                android:textColor="@color/colorTextPrimary"
+                                android:textSize="@dimen/text_size_16sp" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/tagline"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="@dimen/margin_12dp"
+                                android:text="@{vm.movieDetailData.tagline}"
+                                android:textColor="@color/colorTextSecondary"
+                                android:textSize="@dimen/text_size_12sp"
+                                tools:text="A simple tagline." />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/overview_container"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="@dimen/margin_8dp"
+                                android:text="@string/overview"
+                                android:textColor="@color/colorTextPrimary"
+                                android:textSize="@dimen/text_size_16sp" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/overview"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="@dimen/margin_12dp"
+                                android:text="@{vm.movieDetailData.overview}"
+                                android:textColor="@color/colorTextSecondary"
+                                android:textSize="@dimen/text_size_12sp"
+                                tools:text="" />
+
+                        </LinearLayout>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/fab"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top|end"
+                    android:layout_marginEnd="32dp"
+                    android:contentDescription="@string/add_to_wishlist"
+                    android:onClick="@{()-> vm.addToWishList()}"
+                    android:src="@drawable/ic_add_to_wishlist" />
+            </FrameLayout>
+        </ScrollView>
+
+        <RelativeLayout
+            android:id="@+id/baseProgress"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clickable="true"
+            android:focusable="true"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ProgressBar
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:layout_centerInParent="true"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/margin_8dp"
+                android:indeterminate="true"
+                android:visibility="visible" />
+
+        </RelativeLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,22 +1,20 @@
 package com.example.fynddemoproject.di
 
 import com.example.fynddemoproject.base.BaseAppCompatActivity
-import com.example.fynddemoproject.detail.DetailActivity
+import com.example.fynddemoproject.base.BaseFragment
+import com.example.fynddemoproject.home.ListFragment
 import com.example.fynddemoproject.home.MainActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
 @Module
-abstract class ActivityBindingModule {
+abstract class FragmentBindingModule {
 
     @ContributesAndroidInjector
-    abstract fun bindBaseActivity(): BaseAppCompatActivity
+    abstract fun bindBaseFragment(): BaseFragment
 
     @ContributesAndroidInjector
-    abstract fun bindMainActivity(): MainActivity
-
-    @ContributesAndroidInjector
-    abstract fun bindDetailActivity(): DetailActivity
+    abstract fun bindHomeFragment(): ListFragment
 
 
 }

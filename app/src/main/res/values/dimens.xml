@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="movie_row_height">180dp</dimen>
 
     <!-- Margin Sizes -->
     <dimen name="margin_2dp">2dp</dimen>

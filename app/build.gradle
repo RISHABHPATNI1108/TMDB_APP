@@ -11,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.fynddemoproject"
-        minSdkVersion 16
+        minSdkVersion 19
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -24,18 +24,21 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            buildConfigField "String", "BASE_URL", "\"https://api.themoviedb.org/\""
+        }
 
-            applicationVariants.all { variant ->
-                variant.outputs.all {
-                    outputFileName = "${variant.buildType.name}_${defaultConfig.versionName}.apk"
-                }
+        applicationVariants.all { variant ->
+            buildConfigField("String", "SMALL_IMAGE_URL", "\"https://image.tmdb.org/t/p/w200\"")
+            buildConfigField("String", "LARGE_IMAGE_URL", "\"https://image.tmdb.org/t/p/w500\"")
+            buildConfigField("String", "ORIGINAL_IMAGE_URL", "\"https://image.tmdb.org/t/p/original\"")
+            buildConfigField "String", "BASE_URL", "\"https://api.themoviedb.org/\""
+            buildConfigField "String", "TMBD_API_KEY", "\"55da82a26a87b7221062dca9f33a4395\""
+
+            variant.outputs.all {
+                outputFileName = "${variant.buildType.name}_${defaultConfig.versionName}.apk"
             }
 
         }
-        debug {
-            buildConfigField "String", "BASE_URL", "\"https://api.themoviedb.org/\""
-        }
+
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -47,6 +50,7 @@ android {
 
     buildFeatures {
         dataBinding true
+        viewBinding true
     }
 
 
@@ -59,6 +63,7 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'com.google.android.material:material:1.2.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     testImplementation 'junit:junit:4.13.1'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
@@ -70,8 +75,15 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
     // Retrofit
-    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    def retrofitVersion = '2.9.0'
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+
     implementation 'com.squareup.okhttp3:logging-interceptor:4.9.0'
+
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.20'
 
     // Glide
     implementation 'com.github.bumptech.glide:glide:4.11.0'
@@ -82,7 +94,7 @@ dependencies {
     // Logger
     implementation 'com.jakewharton.timber:timber:4.7.1'
 
-    // ViewModel
+    // lifecycle
     def lifecycleVersion = "2.2.0"
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
@@ -99,5 +111,9 @@ dependencies {
     implementation "com.google.dagger:dagger-android-support:$daggerVersion"
     kapt "com.google.dagger:dagger-compiler:$daggerVersion"
     kapt "com.google.dagger:dagger-android-processor:$daggerVersion"
+
+    // Paging
+    def pagingVersion = "2.1.2"
+    implementation "androidx.paging:paging-runtime-ktx:$pagingVersion"
 
 }
