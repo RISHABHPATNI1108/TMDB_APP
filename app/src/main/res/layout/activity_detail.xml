@@ -106,20 +106,6 @@
                             tools:text="ABCD" />
 
                         <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/homepage"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="@dimen/margin_20dp"
-                            android:drawableStart="@drawable/ic_home"
-                            android:drawablePadding="16dp"
-                            android:gravity="center_vertical"
-                            android:text="@{vm.movieDetailData.homepage}"
-                            android:textColor="@color/colorTextSecondary"
-                            android:textSize="@dimen/text_size_12sp"
-                            app:drawableTint="@color/colorTextPrimary"
-                            tools:text="http://www.somewebsite.com/" />
-
-                        <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/companies"
                             productionCompanies="@{vm.movieDetailData.productionCompanies}"
                             android:layout_width="match_parent"

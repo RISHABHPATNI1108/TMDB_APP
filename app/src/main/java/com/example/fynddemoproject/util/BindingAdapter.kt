@@ -31,8 +31,11 @@ object BindingAdapter {
     ) {
         var string = ""
         companies?.let { it ->
-            for (company in it) {
-                string = string + ", " + company?.name
+            string += companies[0]?.name
+            for (company in it.withIndex()) {
+                if (company.index != 0) {
+                    string = string + ", " + company.value?.name
+                }
             }
         }
         view.text = string
